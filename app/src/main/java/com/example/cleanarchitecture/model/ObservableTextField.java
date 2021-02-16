@@ -6,13 +6,13 @@ public enum ObservableTextField {
 
     TEXT_FIELD;
 
-    private final PublishSubject<String> newText = PublishSubject.create();
+    private final PublishSubject<String> text = PublishSubject.create();
 
     public void newText(String text) {
-        newText.onNext(text);
+        this.text.onNext(text);
     }
     public rx.Observable<String> getText() {
 
-        return newText;
+        return text;
     }
 }
