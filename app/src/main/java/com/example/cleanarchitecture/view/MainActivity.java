@@ -4,35 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.cleanarchitecture.R;
-import com.example.cleanarchitecture.model.Model;
-import com.example.cleanarchitecture.model.ModelObserver;
+import com.example.cleanarchitecture.model.ObservableTextField;
 
-import org.w3c.dom.Text;
-
-public class MainActivity extends AppCompatActivity implements ModelObserver {
+public class MainActivity extends AppCompatActivity  {
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Model.TEXT.attach(this);
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        TextView textView = findViewById(R.id.textView);
+        ObservableTextField.TEXT_FIELD.getText().subscribe(textView::setText);
+        super.onCreate(savedInstanceState);
     }
 
     public void onButtonClick(View view) {
         EditText simpleEditText = findViewById(R.id.simpleEditText);
         String text = simpleEditText.getText().toString();
-        Model.TEXT.setTextInEditTextField(text);
-    }
-
-    @Override
-    public void Update() {
-
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(Model.TEXT.getTextInEditTextField());
+        ObservableTextField.TEXT_FIELD.newText(text);
     }
 }
