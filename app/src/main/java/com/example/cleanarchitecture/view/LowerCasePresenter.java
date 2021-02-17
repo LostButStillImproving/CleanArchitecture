@@ -14,7 +14,7 @@ public class LowerCasePresenter implements Presenter {
         ObservableTextField.TEXT_FIELD.getText().subscribe(this::setToLowerCase);
     }
 
-    public void setToLowerCase(String s) {
+    private void setToLowerCase(String s) {
         text = s.toLowerCase();
     }
 

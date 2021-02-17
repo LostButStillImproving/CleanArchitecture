@@ -4,6 +4,5 @@ public interface Presenter {
 
     void subscribe();
 
-
     String getText();
 }

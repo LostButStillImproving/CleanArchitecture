@@ -12,21 +12,22 @@ import com.example.cleanarchitecture.model.ObservableTextField;
 
 public class MainActivity extends AppCompatActivity  {
 
-    Presenter casePresenter = null;
-    //
+    Presenter casePresenter;
 
     public void setPresenter(Presenter presenter) {
+
         casePresenter = presenter;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         setContentView(R.layout.activity_main);
-        setPresenter(new UpperCasePresenter());
+        setPresenter(new TrueCasePresenter());
         super.onCreate(savedInstanceState);
     }
 
     public void onButtonClick(View view) {
+
         EditText simpleEditText = findViewById(R.id.simpleEditText);
         String text = simpleEditText.getText().toString();
         ObservableTextField.TEXT_FIELD.newText(text);
