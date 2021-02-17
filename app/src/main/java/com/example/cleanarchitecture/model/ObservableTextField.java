@@ -2,6 +2,7 @@ package com.example.cleanarchitecture.model;
 
 import rx.subjects.PublishSubject;
 
+
 public enum ObservableTextField {
 
     TEXT_FIELD;

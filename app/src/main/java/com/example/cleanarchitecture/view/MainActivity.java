@@ -9,14 +9,20 @@ import android.widget.TextView;
 
 import com.example.cleanarchitecture.R;
 import com.example.cleanarchitecture.model.ObservableTextField;
+import com.example.cleanarchitecture.persistence.Repository;
+import com.example.cleanarchitecture.persistence.sqlite.SQLiteRepository;
 
 public class MainActivity extends AppCompatActivity  {
 
     Presenter casePresenter;
+    Repository repositoryDB;
 
     public void setPresenter(Presenter presenter) {
 
         casePresenter = presenter;
+    }
+    public void setDatabase(Repository repository ) {
+        repositoryDB = repository;
     }
 
     @Override
@@ -24,6 +30,10 @@ public class MainActivity extends AppCompatActivity  {
 
         setContentView(R.layout.activity_main);
         setPresenter(new TrueCasePresenter());
+        setDatabase(new SQLiteRepository(this));
+        TextView textView = findViewById(R.id.textView);
+        textView.setText(repositoryDB.loadLastText());
+
         super.onCreate(savedInstanceState);
     }
 
