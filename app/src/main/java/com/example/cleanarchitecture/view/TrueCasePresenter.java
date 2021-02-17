@@ -10,11 +10,7 @@ public class TrueCasePresenter implements Presenter {
         subscribe();
     }
 
-    @Override
-    public void subscribe() {
 
-        ObservableTextField.TEXT_FIELD.getText().subscribe(this::setToTrueCase);
-    }
 
     private void setToTrueCase(String s) {
 
@@ -25,5 +21,11 @@ public class TrueCasePresenter implements Presenter {
     public String getText() {
 
         return text;
+    }
+
+    @Override
+    public void subscribe() {
+
+        ObservableTextField.TEXT_FIELD.getText().subscribe(this::setToTrueCase);
     }
 }

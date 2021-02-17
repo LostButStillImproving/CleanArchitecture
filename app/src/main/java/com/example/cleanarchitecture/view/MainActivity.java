@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity  {
 
         casePresenter = presenter;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity  {
 
         EditText simpleEditText = findViewById(R.id.simpleEditText);
         String text = simpleEditText.getText().toString();
-        ObservableTextField.TEXT_FIELD.newText(text);
+        ObservableTextField.TEXT_FIELD.setText(text);
         TextView textView = findViewById(R.id.textView);
         textView.setText(casePresenter.getText());
     }

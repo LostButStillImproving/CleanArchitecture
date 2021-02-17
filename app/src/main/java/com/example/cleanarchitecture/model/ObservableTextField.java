@@ -8,7 +8,7 @@ public enum ObservableTextField {
 
     private final PublishSubject<String> text = PublishSubject.create();
 
-    public void newText(String text) {
+    public void setText(String text) {
         this.text.onNext(text);
     }
     public rx.Observable<String> getText() {
