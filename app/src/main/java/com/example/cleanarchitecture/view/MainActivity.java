@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity  {
     Repository repository;
 
     public void setPresenter() {
-
         if (presenter.equals(TRUE_CASE)) {
             casePresenter = new TrueCasePresenter();
         }
@@ -41,15 +40,13 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
     public void setDatabase() {
-
         if (database.equals(SQLITE)) {
             repository = new SQLiteImpl(this);
-
         }
+
         if (database.equals(FIREBASE)) {
             repository = new FireStoreImpl();
-            FirebaseFirestore instance = (FirebaseFirestore) repository.getInstance();
-            attachFireBaseChangeListener(instance);
+            attachFireBaseChangeListener();
         }
     }
 
@@ -66,7 +63,6 @@ public class MainActivity extends AppCompatActivity  {
 
 
     public void onButtonClick(View view) {
-
         EditText simpleEditText = findViewById(R.id.simpleEditText);
         String text = simpleEditText.getText().toString();
         ObservableTextField.TEXT_FIELD.setText(text);
@@ -74,8 +70,9 @@ public class MainActivity extends AppCompatActivity  {
         textView.setText(casePresenter.getText());
     }
 
-    private ListenerRegistration attachFireBaseChangeListener(FirebaseFirestore instance) {
-        return instance.collection("texts").addSnapshotListener((value, e) -> {
+    private void attachFireBaseChangeListener() {
+        FirebaseFirestore instance = FirebaseFirestore.getInstance();
+        instance.collection("texts").addSnapshotListener((value, e) -> {
             if (e != null) {
                 Log.w("snapshotlistener", "Listen failed.", e);
                 return;
