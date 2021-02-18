@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.cleanarchitecture.R;
 import com.example.cleanarchitecture.model.ObservableTextField;
+import com.example.cleanarchitecture.persistence.CallBack;
 import com.example.cleanarchitecture.persistence.DatabaseEnums;
 import com.example.cleanarchitecture.persistence.Repository;
 import com.example.cleanarchitecture.persistence.firebase.FireStoreImpl;
@@ -23,7 +24,7 @@ import static com.example.cleanarchitecture.view.PresenterEnums.*;
 public class MainActivity extends AppCompatActivity  {
 
     final DatabaseEnums database = FIREBASE;  /// SET EITHER SQLITE OR FIREBASE
-    final PresenterEnums presenter = LOWER_CASE; /// SET EITHER TRUECASE, LOWERCASE, UPPERCASE
+    final PresenterEnums presenter = UPPER_CASE; /// SET EITHER TRUECASE, LOWERCASE, UPPERCASE
 
     Presenter casePresenter;
     Repository repository;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity  {
         setPresenter();
         setDatabase();
         TextView textView = findViewById(R.id.textView);
-        repository.fetchLatestText(textView::setText);
+        repository.fetchLatestText(value -> textView.setText(casePresenter.treatAndReturnText(value)));
         super.onCreate(savedInstanceState);
     }
 
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity  {
                 return;
             }
             TextView textView = findViewById(R.id.textView);
-            repository.fetchLatestText(textView::setText);
+            repository.fetchLatestText(value1 -> textView.setText(casePresenter.treatAndReturnText(value1)));
         });
     }
 }

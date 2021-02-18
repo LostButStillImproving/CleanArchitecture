@@ -28,4 +28,9 @@ public class TrueCasePresenter implements Presenter {
 
         ObservableTextField.TEXT_FIELD.getText().subscribe(this::setToTrueCase);
     }
+
+    @Override
+    public String treatAndReturnText(String text) {
+        return text;
+    }
 }

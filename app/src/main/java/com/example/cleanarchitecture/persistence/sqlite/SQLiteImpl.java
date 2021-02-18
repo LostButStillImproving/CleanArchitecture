@@ -55,11 +55,6 @@ public class SQLiteImpl extends SQLiteOpenHelper implements Repository {
     }
 
     @Override
-    public Object getInstance() {
-        return null;
-    }
-
-    @Override
     public void subscribe() {
         ObservableTextField.TEXT_FIELD.getText().subscribe(this::persistText);
     }

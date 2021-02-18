@@ -11,5 +11,4 @@ public interface Repository {
 
     void fetchLatestText(CallBack callBack);
 
-    Object getInstance();
 }

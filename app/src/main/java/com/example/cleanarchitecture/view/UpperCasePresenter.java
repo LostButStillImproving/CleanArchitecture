@@ -23,4 +23,9 @@ public class UpperCasePresenter implements Presenter {
 
         return text;
     }
+
+    @Override
+    public String treatAndReturnText(String text) {
+        return text.toUpperCase();
+    }
 }

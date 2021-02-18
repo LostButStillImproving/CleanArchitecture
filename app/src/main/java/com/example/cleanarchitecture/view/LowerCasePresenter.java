@@ -21,4 +21,9 @@ public class LowerCasePresenter implements Presenter {
     public String getText() {
         return text;
     }
+
+    @Override
+    public String treatAndReturnText(String text) {
+        return text.toLowerCase();
+    }
 }
