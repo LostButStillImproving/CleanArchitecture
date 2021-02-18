@@ -5,12 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.example.cleanarchitecture.model.ObservableTextField;
 import com.example.cleanarchitecture.persistence.Repository;
-import static android.database.sqlite.SQLiteDatabase.*;
+import com.example.cleanarchitecture.persistence.firebase.CallBack;
 
 
 public class SQLiteRepository  extends SQLiteOpenHelper implements Repository {
@@ -46,15 +47,16 @@ public class SQLiteRepository  extends SQLiteOpenHelper implements Repository {
     }
 
     @Override
-    public String loadLastText() {
+    public String callbackLatestText(CallBack callBack) {
 
         String selectLastRowStatement = "SELECT " + COLUMN_CONTENT + " FROM " + TEXTS_TABLE + " ORDER BY ID DESC LIMIT 1";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectLastRowStatement, null);
         if (cursor.moveToNext()) {
             String lastText = cursor.getString(0);
+            Log.d("SQL", "WORKING");
             cursor.close();
-            return lastText;
+            callBack.onCallback(lastText);
         }
         return null;
     }
