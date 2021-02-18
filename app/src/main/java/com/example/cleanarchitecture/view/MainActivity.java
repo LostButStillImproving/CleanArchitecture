@@ -14,8 +14,8 @@ import com.example.cleanarchitecture.persistence.firebase.FireStoreImpl;
 import com.example.cleanarchitecture.persistence.sqlite.SQLiteRepository;
 
 public class MainActivity extends AppCompatActivity  {
-    final String database = "SQLITE";
-    final String presenter = "UPPERCASE";
+    final String database = "SQLITE";  /// SET EITHER SQLITE OR FIREBASE
+    final String presenter = "UPPERCASE"; /// SET TRUECASE, LOWERCASE, UPPERCASE
 
     Presenter casePresenter;
     Repository repositoryDB;

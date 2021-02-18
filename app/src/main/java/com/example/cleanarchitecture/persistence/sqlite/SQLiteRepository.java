@@ -47,7 +47,7 @@ public class SQLiteRepository  extends SQLiteOpenHelper implements Repository {
     }
 
     @Override
-    public String callbackLatestText(CallBack callBack) {
+    public void callbackLatestText(CallBack callBack) {
 
         String selectLastRowStatement = "SELECT " + COLUMN_CONTENT + " FROM " + TEXTS_TABLE + " ORDER BY ID DESC LIMIT 1";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -58,7 +58,6 @@ public class SQLiteRepository  extends SQLiteOpenHelper implements Repository {
             cursor.close();
             callBack.onCallback(lastText);
         }
-        return null;
     }
 
     @Override

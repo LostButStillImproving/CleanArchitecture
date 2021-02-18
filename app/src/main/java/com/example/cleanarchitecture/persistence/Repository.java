@@ -8,7 +8,7 @@ public interface Repository {
 
     void subscribe();
 
-    String callbackLatestText(CallBack callBack);
+    void callbackLatestText(CallBack callBack);
 
 
 }
