@@ -1,6 +1,7 @@
 package com.example.cleanarchitecture.persistence;
 
-import com.example.cleanarchitecture.persistence.firebase.CallBack;
+import com.example.cleanarchitecture.persistence.firebase.FireStoreImpl;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public interface Repository {
 
@@ -8,7 +9,7 @@ public interface Repository {
 
     void subscribe();
 
-    void callbackLatestText(CallBack callBack);
+    void fetchLatestText(CallBack callBack);
 
-
+    Object getInstance();
 }

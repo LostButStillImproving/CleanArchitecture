@@ -1,11 +1,7 @@
 package com.example.cleanarchitecture.persistence.firebase;
 
-import android.os.Build;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-
 import com.example.cleanarchitecture.model.ObservableTextField;
+import com.example.cleanarchitecture.persistence.CallBack;
 import com.example.cleanarchitecture.persistence.Repository;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.Timestamp;
@@ -20,30 +16,30 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-
 public class FireStoreImpl implements Repository {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
     public FireStoreImpl() {
         subscribe();
+
     }
 
+    private void setOberservableTextFieldValue(String string) {
+        ObservableTextField.TEXT_FIELD.setText(string);
+    }
 
     @Override
     public void persistText(String s) {
-
         Map<String, Object> text = new HashMap<>();
         Timestamp timeStamp = new Timestamp(new Date());
         text.put("text", s);
         text.put("time", timeStamp);
         db.collection("texts").add(text);
-
     }
 
     @Override
-    public void callbackLatestText(CallBack callBack) {
+    public void fetchLatestText(CallBack callBack) {
         CollectionReference texts = db.collection("texts");
         Query getLatestText = texts.orderBy("time", Query.Direction.DESCENDING).limit(1);
 
@@ -52,8 +48,11 @@ public class FireStoreImpl implements Repository {
             DocumentSnapshot document = Objects.requireNonNull(querySnapshot).getDocuments().get(0);
             String text = (String) Objects.requireNonNull(document.getData()).get("text");
             callBack.onCallback(text);
-
         });
+    }
+
+    public FirebaseFirestore getInstance() {
+        return db;
     }
 
     @Override
